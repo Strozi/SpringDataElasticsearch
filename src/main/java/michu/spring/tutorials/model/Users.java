@@ -1,11 +1,18 @@
 package michu.spring.tutorials.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.springframework.data.elasticsearch.annotations.Document;
 
+@Entity
 @Document(indexName = "users", type="users", shards=1)
 public class Users {
 
 	private String name;
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String teamName;
 	private Long salary;
@@ -13,10 +20,9 @@ public class Users {
 	public Users(){}
 	
 	
-	public Users(String name, Long id, String teamName, Long salary) {
+	public Users(String name, String teamName, Long salary) {
 		super();
-		this.name = name;
-		this.id = id;
+		this.name = name;		
 		this.teamName = teamName;
 		this.salary = salary;
 	}

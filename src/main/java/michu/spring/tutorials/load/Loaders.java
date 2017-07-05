@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import michu.spring.tutorials.jparepository.UserJpaRepository;
 import michu.spring.tutorials.model.Users;
 import michu.spring.tutorials.repository.UsersRepository;
 
@@ -24,13 +25,18 @@ public class Loaders {
 	@Autowired
 	ElasticsearchOperations operations; 
 	
+	@Autowired
+	UserJpaRepository userJpaRepository;
+	
 	@PostConstruct
 	@Transactional
 	public void loadAll(){
 		
 		operations.putMapping(Users.class);
 		System.out.println("Loading Data");
-		//usersRepository.save(getData());
+		List<Users> data = getData();
+		userJpaRepository.save(data); // save to H2 database		
+		usersRepository.save(userJpaRepository.findAll()); //loads from H2 to ES
 		System.out.println("Loading complited");
 		
 	}
@@ -39,10 +45,10 @@ public class Loaders {
 		
 		List<Users> users = new ArrayList<>();
 		
-		users.add(new Users("Agata", 123L, "Controling", 8000L));
-		users.add(new Users("Marta", 1234L, "Accounting", 6000L));
-		users.add(new Users("Gosia", 12345L, "Programming", 7000L));
-		users.add(new Users("Agata", 123L, "Traveling", 10000L));
+		users.add(new Users("Agata", "Controling", 8000L));
+		users.add(new Users("Marta", "Accounting", 6000L));
+		users.add(new Users("Gosia", "Programming", 7000L));
+		users.add(new Users("Agata", "Traveling", 10000L));
 		return users;
 		
 	}
