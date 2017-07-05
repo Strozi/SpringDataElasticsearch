@@ -8,5 +8,6 @@ public class SpringDataEsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDataEsApplication.class, args);
+		
 	}
 }

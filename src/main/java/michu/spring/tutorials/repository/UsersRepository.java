@@ -12,5 +12,5 @@ public interface UsersRepository extends ElasticsearchRepository<Users, Long>{
 
 	List<Users> findBySalary(Long salary);
 
-
+	List<Users> findByNameContains(String text);
 }

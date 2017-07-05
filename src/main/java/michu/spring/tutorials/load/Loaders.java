@@ -15,7 +15,7 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import michu.spring.tutorials.model.Users;
 import michu.spring.tutorials.repository.UsersRepository;
 
-@Component
+//@Component
 public class Loaders {
 	
 	@Autowired
@@ -30,7 +30,7 @@ public class Loaders {
 		
 		operations.putMapping(Users.class);
 		System.out.println("Loading Data");
-		usersRepository.save(getData());
+		//usersRepository.save(getData());
 		System.out.println("Loading complited");
 		
 	}
@@ -42,9 +42,9 @@ public class Loaders {
 		users.add(new Users("Agata", 123L, "Controling", 8000L));
 		users.add(new Users("Marta", 1234L, "Accounting", 6000L));
 		users.add(new Users("Gosia", 12345L, "Programming", 7000L));
-		
+		users.add(new Users("Agata", 123L, "Traveling", 10000L));
 		return users;
 		
 	}
-
+	
 }

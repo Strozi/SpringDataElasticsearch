@@ -39,5 +39,11 @@ public class SearchResource {
 		return all;
 	}
 	
+	@GetMapping(value="/name/contains/{text}")
+	public List<Users> searchNameContains(@PathVariable final String text){
+		
+		return usersRepository.findByNameContains(text);
+	}
+	
 	
 }
